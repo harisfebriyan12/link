@@ -7,6 +7,7 @@ use App\Http\Controllers\CardController;
 Route::get('/', [CardController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('cards', [CardController::class, 'index'])->name('cards.index');
     Route::resource('cards', CardController::class)->except(['index', 'show']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

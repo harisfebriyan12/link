@@ -174,22 +174,43 @@
 </head>
 <body>
     <header>
-        <div>
-            <a href="{{ url('/') }}" class="logo">Portal Informasi Karawang</a>
+        <div class="flex items-center space-x-4">
+            @auth
+                @if(Auth::user()->role === 'admin')
+                    <a href="{{ url('/') }}" class="logo text-base font-semibold flex items-center space-x-2">
+                        <span class="text-xs">Dashboard Admin Web Portal Karawang</span>
+                    </a>
+                @else
+                    <a href="{{ url('/') }}" class="logo">Portal Informasi Karawang</a>
+                @endif
+            @else
+                <a href="{{ url('/') }}" class="logo">Portal Informasi Karawang</a>
+            @endauth
         </div>
-        <div class="auth-links">
+        <div class="auth-links flex items-center space-x-4">
             @guest
                 <a href="{{ route('login') }}" class="login-btn">Login</a>
             @else
-                <a href="{{ route('admin.dashboard') }}" class="text-green-700 font-semibold hover:text-green-900 mr-6">
-                    Dashboard Admin
-                </a>
-                <img src="{{ Auth::user()->profile_photo_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}" alt="Profile" class="profile-img" />
-                <span class="user-name">{{ Auth::user()->name }}</span>
-                <form method="POST" action="{{ route('logout') }}" class="logout-form inline">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
+                @if(Auth::user()->role === 'admin')
+                    <a href="{{ route('admin.dashboard') }}" class="inline-block bg-green-700 text-white px-4 py-2 rounded-full shadow hover:bg-green-800 transition duration-300 mr-4">
+                        Manage Cards
+                    </a>
+                @endif
+                <div class="relative inline-block text-left">
+                    <button type="button" class="flex items-center space-x-2 focus:outline-none" id="user-menu-button" aria-expanded="true" aria-haspopup="true" onclick="document.getElementById('user-menu').classList.toggle('hidden')">
+                        <img src="{{ Auth::user()->profile_photo_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}" alt="Profile" class="profile-img" />
+                        <span class="user-name">{{ Auth::user()->name }}</span>
+                        <svg class="w-4 h-4 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="user-menu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                        <form method="POST" action="{{ route('logout') }}" class="p-2">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100 rounded-md font-semibold">Logout</button>
+                        </form>
+                    </div>
+                </div>
             @endguest
         </div>
     </header>
