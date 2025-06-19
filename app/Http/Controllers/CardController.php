@@ -77,7 +77,6 @@ class CardController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            // Delete old image
             if ($card->gambar) {
                 Storage::disk('public')->delete($card->gambar);
             }

@@ -12,9 +12,6 @@
         <div class="mt-16">
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
                 @foreach ($cards->take(10) as $card)
-                    @php
-                        $card->gambar = asset('storage/' . $card->gambar);
-                    @endphp
                     @include('components.small-card', ['card' => $card])
                 @endforeach
             </div>

@@ -13,35 +13,35 @@
     </div>
 @endif
 
-<form action="{{ route('cards.update', $card->id) }}" method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto bg-white p-6 rounded shadow">
+<form action="{{ route('cards.update', $card->id) }}" method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
     @csrf
     @method('PUT')
-    <div class="mb-4">
-        <label for="judul" class="block font-semibold mb-1">Judul</label>
-        <input type="text" name="judul" id="judul" value="{{ old('judul', $card->judul) }}" class="w-full border border-gray-300 rounded px-3 py-2" required />
+    <div class="mb-6">
+        <label for="judul" class="block text-gray-700 font-semibold mb-2">Judul</label>
+        <input type="text" name="judul" id="judul" value="{{ old('judul', $card->judul) }}" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500" required />
     </div>
-    <div class="mb-4">
-        <label for="deskripsi" class="block font-semibold mb-1">Deskripsi</label>
-        <textarea name="deskripsi" id="deskripsi" rows="4" class="w-full border border-gray-300 rounded px-3 py-2" required>{{ old('deskripsi', $card->deskripsi) }}</textarea>
+    <div class="mb-6">
+        <label for="deskripsi" class="block text-gray-700 font-semibold mb-2">Deskripsi</label>
+        <textarea name="deskripsi" id="deskripsi" rows="5" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500" required>{{ old('deskripsi', $card->deskripsi) }}</textarea>
     </div>
-    <div class="mb-4">
-        <label for="gambar" class="block font-semibold mb-1">Gambar</label>
+    <div class="mb-6">
+        <label for="gambar" class="block text-gray-700 font-semibold mb-2">Gambar</label>
         <input type="file" name="gambar" id="gambar" accept="image/*" class="w-full" />
         @if ($card->gambar)
-            <img src="{{ asset('storage/' . $card->gambar) }}" alt="{{ $card->judul }}" class="mt-2 rounded max-h-48" />
+            <img src="{{ asset('storage/' . $card->gambar) }}" alt="{{ $card->judul }}" class="mt-3 rounded-lg max-h-48 shadow-md" />
         @endif
     </div>
-    <div class="mb-4">
-        <label for="link" class="block font-semibold mb-1">Link Eksternal</label>
-        <input type="url" name="link" id="link" value="{{ old('link', $card->link) }}" class="w-full border border-gray-300 rounded px-3 py-2" required />
+    <div class="mb-6">
+        <label for="link" class="block text-gray-700 font-semibold mb-2">Link Eksternal</label>
+        <input type="url" name="link" id="link" value="{{ old('link', $card->link) }}" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500" required />
     </div>
-    <div class="flex justify-end space-x-2">
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Update</button>
-        <form action="{{ route('cards.destroy', $card->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus card ini?');" class="inline">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Hapus</button>
-        </form>
+    <div class="flex justify-between items-center max-w-lg mx-auto">
+        <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition duration-300">Update</button>
     </div>
+</form>
+<form action="{{ route('cards.destroy', $card->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus card ini?');" class="max-w-lg mx-auto mt-4">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="bg-red-600 text-white px-6 py-3 rounded-lg shadow hover:bg-red-700 transition duration-300 w-full">Hapus</button>
 </form>
 @endsection
