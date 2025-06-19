@@ -1,0 +1,52 @@
+Panduan Lengkap Mengatur Database Laravel untuk Portal Informasi Karawang
+
+1. Pastikan Anda sudah mengimpor file SQL ke MySQL
+---------------------------------------------------
+- Buka phpMyAdmin di browser: http://localhost/phpmyadmin
+- Buat database baru dengan nama "portal_karawang" jika belum ada
+- Pilih database "portal_karawang"
+- Klik tab "Import"
+- Pilih file "portal_karawang_admin_db.sql" yang sudah disediakan
+- Klik "Go" untuk mengimpor struktur tabel dan data user admin
+
+2. Konfigurasi file .env Laravel
+--------------------------------
+- Buka file .env di root project Laravel Anda
+- Pastikan konfigurasi database sesuai dengan MySQL Anda, contoh:
+  DB_CONNECTION=mysql
+  DB_HOST=127.0.0.1
+  DB_PORT=3306
+  DB_DATABASE=portal_karawang
+  DB_USERNAME=root
+  DB_PASSWORD= (kosongkan jika tidak ada password)
+
+3. Jalankan migrasi (opsional)
+-----------------------------
+- Jika Anda ingin menggunakan migration Laravel, jalankan perintah:
+  php artisan migrate
+- Pastikan tabel users dan cards sudah ada di database
+
+4. Cek koneksi database
+-----------------------
+- Jalankan perintah berikut untuk cek koneksi:
+  php artisan migrate:status
+- Jika muncul daftar migration, berarti koneksi berhasil
+
+5. Login ke aplikasi
+-------------------
+- Buka halaman login: http://127.0.0.1:8000/login
+- Gunakan email: admin@example.com
+- Gunakan password: password123
+
+6. Troubleshooting
+-----------------
+- Jika masih gagal login, pastikan:
+  a. Data user admin sudah ada di tabel users
+  b. Password sudah benar (password123)
+  c. Cache konfigurasi sudah dibersihkan dengan perintah:
+     php artisan config:clear
+     php artisan cache:clear
+  d. Restart server Laravel dengan:
+     php artisan serve
+
+Jika Anda membutuhkan bantuan lebih lanjut, silakan hubungi saya.
