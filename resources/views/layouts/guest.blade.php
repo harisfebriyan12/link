@@ -15,6 +15,22 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
+<header class="bg-white shadow border-b border-gray-200 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            <div class="flex items-center space-x-3">
+                <img src="{{ asset('storage/logo sidebar/logokrw.png') }}" alt="Logo" class="w-10 h-10 object-contain" />
+                <div class="flex flex-col">
+                    <span class="text-2xl font-semibold text-gray-900 leading-none">Portal Informasi Karawang</span>
+                    <span class="text-sm text-gray-600 leading-none">Login</span>
+                </div>
+            </div>
+            <div>
+                <a href="{{ route('login') }}" class="text-green-700 hover:text-green-900 font-semibold">Login</a>
+            </div>
+        </div>
+    </div>
+</header>
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">

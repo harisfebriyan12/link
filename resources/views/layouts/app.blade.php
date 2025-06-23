@@ -8,198 +8,48 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #e0f2f1, #bbdefb);
-            color: #1b4332;
-            min-height: 100vh;
-            margin: 0;
-        }
-        a {
-            transition: color 0.3s ease;
-        }
-        a:hover {
-            color: #0d9488;
-        }
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #c8e6c9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: #0d9488;
-            border-radius: 10px;
-            border: 2px solid #c8e6c9;
-        }
-        /* Header styles */
-        header {
-            background: #ffffffcc;
-            backdrop-filter: saturate(180%) blur(20px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-bottom: 1px solid #81c784;
-            padding: 1.5rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        header a.logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #2e7d32;
-            letter-spacing: -0.02em;
-            text-decoration: none;
-        }
-        header a.logo:hover {
-            color: #1b5e20;
-        }
-        header .auth-links a.login-btn {
-            background-color: #2e7d32;
-            color: white;
-            padding: 0.75rem 2rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(46,125,50,0.4);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            text-decoration: none;
-        }
-        header .auth-links a.login-btn:hover {
-            background-color: #1b5e20;
-            box-shadow: 0 6px 12px rgba(27,94,32,0.6);
-        }
-        header .auth-links .profile-img {
-            width: 48px;
-            height: 48px;
-            border-radius: 9999px;
-            object-fit: cover;
-            border: 3px solid #2e7d32;
-            box-shadow: 0 2px 8px rgba(46,125,50,0.5);
-        }
-        header .auth-links .user-name {
-            color: #2e7d32;
-            font-weight: 600;
-            margin-left: 0.75rem;
-            font-size: 1.125rem;
-        }
-        header .auth-links form.logout-form button {
-            background: transparent;
-            border: 2px solid #e53935;
-            color: #e53935;
-            padding: 0.5rem 1.25rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        header .auth-links form.logout-form button:hover {
-            background-color: #e53935;
-            color: white;
-        }
-        /* Main section */
-        section.intro {
-            max-width: 72rem;
-            margin: 4rem auto 3rem;
-            padding: 0 1.5rem;
-            text-align: center;
-        }
-        section.intro h1 {
-            font-family: 'Georgia', serif;
-            font-size: 3.75rem;
-            font-weight: 700;
-            color: #1b4332;
-            margin-bottom: 1.5rem;
-            border-bottom: 4px solid #2e7d32;
-            padding-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-        section.intro p {
-            font-size: 1.25rem;
-            color: #2f4f4f;
-            max-width: 48rem;
-            margin: 0 auto;
-            line-height: 1.6;
-            font-family: 'Poppins', sans-serif;
-        }
-        /* Search form */
-        section.search-form {
-            background: white;
-            max-width: 28rem;
-            margin: 2rem auto 3rem;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(46,125,50,0.15);
-        }
-        section.search-form form input[type="text"] {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            font-size: 1.125rem;
-            border-radius: 9999px;
-            border: 2px solid #a5d6a7;
-            background-color: #e8f5e9;
-            color: #1b4332;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        section.search-form form input[type="text"]::placeholder {
-            color: #81c784;
-        }
-        section.search-form form input[type="text"]:focus {
-            outline: none;
-            border-color: #2e7d32;
-            box-shadow: 0 0 8px #2e7d32aa;
-            background-color: #d0f0c0;
-        }
-        /* Main content */
-        main.container {
-            max-width: 72rem;
-            margin: 0 auto;
-            padding: 0 1.5rem 3rem;
-            flex-grow: 1;
-        }
-        /* Footer */
-        footer {
-            background-color: #dcedc8;
-            text-align: center;
-            padding: 1.5rem 1rem;
-            font-weight: 600;
-            color: #33691e;
-            border-top: 1px solid #aed581;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-        }
-    </style>
 </head>
-<body>
-    <header>
+<body class="bg-gradient-to-br from-teal-100 to-blue-200 text-green-900 min-h-screen font-poppins m-0">
+    <header class="bg-white bg-opacity-80 backdrop-saturate-180 backdrop-blur-md shadow-md border-b border-green-300 p-6 sticky top-0 z-50 flex justify-between items-center">
         <div class="flex items-center space-x-4">
             @auth
                 @if(Auth::user()->role === 'admin')
-                    <a href="{{ url('/') }}" class="logo text-base font-semibold flex items-center space-x-2">
-                        <span class="text-xs">Dashboard Admin Web Portal Karawang</span>
+                    <a href="{{ url('/') }}" class="logo text-base font-semibold flex items-center space-x-2 text-green-800 hover:text-green-900 tracking-tight">
+                        <img src="{{ asset('storage/logo sidebar/logokrw.png') }}" alt="Logo" class="h-12 w-auto" />
+                        <span class="text-sm">Dashboard Admin Web Portal Karawang</span>
                     </a>
                 @else
-                    <a href="{{ url('/') }}" class="logo">Portal Informasi Karawang</a>
+                    <a href="{{ url('/') }}" class="logo flex items-center space-x-4 text-green-800 hover:text-green-900 tracking-tight font-semibold text-base min-w-[300px] max-w-none overflow-visible">
+                        <img src="{{ asset('storage/logo sidebar/logokrw.png') }}" alt="Logo" class="h-48 sm:h-64 md:h-72 lg:h-80 xl:h-96 w-auto max-w-full" style="min-width: 200px !important; height: auto !important; max-width: none !important;" />
+                        <span class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold">Portal Informasi Karawang</span>
+                    </a>
                 @endif
             @else
-                <a href="{{ url('/') }}" class="logo">Portal Informasi Karawang</a>
+                <a href="{{ url('/') }}" class="logo flex items-center space-x-2 text-green-800 hover:text-green-900 tracking-tight font-semibold text-base">
+                    <img src="{{ asset('storage/logo sidebar/logokrw.png') }}" alt="Logo" class="h-12 w-auto" />
+                    <span>Portal Informasi Karawang</span>
+                </a>
             @endauth
         </div>
         <div class="auth-links flex items-center space-x-4">
             @guest
-                <a href="{{ route('login') }}" class="login-btn">Login</a>
+                <a href="{{ route('login') }}" class="inline-flex items-center gap-2 bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded-full shadow transition-all duration-200">
+                    {{-- Ikon Login Heroicons: Arrow Right On Rectangle --}}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
+                    </svg>
+                    Login
+                </a>
             @else
                 @if(Auth::user()->role === 'admin')
-                    <a href="{{ route('admin.dashboard') }}" class="inline-block bg-green-700 text-white px-4 py-2 rounded-full shadow hover:bg-green-800 transition duration-300 mr-4">
+                    <a href="{{ route('admin.dashboard') }}" class="inline-block bg-green-700 text-white px-4 py-2 rounded-full shadow hover:bg-green-800 transition duration-300 mr-4 text-sm font-semibold">
                         Manage Cards
                     </a>
                 @endif
                 <div class="relative inline-block text-left">
                     <button type="button" class="flex items-center space-x-2 focus:outline-none" id="user-menu-button" aria-expanded="true" aria-haspopup="true" onclick="document.getElementById('user-menu').classList.toggle('hidden')">
-                        <img src="{{ Auth::user()->profile_photo_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}" alt="Profile" class="profile-img" />
-                        <span class="user-name">{{ Auth::user()->name }}</span>
+                        <img src="{{ Auth::user()->profile_photo_url ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}" alt="Profile" class="h-10 w-10 rounded-full object-cover border-4 border-green-700 shadow-md" />
+                        <span class="user-name text-green-800 font-semibold ml-2 text-base">{{ Auth::user()->name }}</span>
                         <svg class="w-4 h-4 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
@@ -215,28 +65,36 @@
         </div>
     </header>
 
-    <section class="intro" data-aos="fade-up">
-        <h1>Portal Informasi Karawang</h1>
-        <p>Temukan berbagai informasi penting, menarik, dan terkini seputar Karawang melalui portal ini.</p>
+    <section class="intro max-w-7xl mx-auto mt-16 mb-12 px-6 text-center">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-green-900 mb-4 tracking-tight border-b-4 border-green-700 pb-2 font-georgia">Portal Informasi Karawang</h1>
+        <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-8 leading-relaxed font-poppins">Temukan berbagai informasi penting, menarik, dan terkini seputar Karawang melalui portal ini.</p>
     </section>
 
-    <section class="search-form" data-aos="fade-up" data-aos-delay="100">
+    <section class="search-form max-w-md mx-auto mb-12 px-6" data-aos="fade-up" data-aos-delay="100">
         <form method="GET" action="{{ route('home') }}">
-            <input 
-                type="text" 
-                name="search" 
-                placeholder="Cari informasi..." 
-                value="{{ request('search') }}" 
-                aria-label="Cari informasi"
-            />
+            <div class="relative">
+                <input 
+                    type="text" 
+                    name="search" 
+                    placeholder="Cari informasi..." 
+                    value="{{ request('search') }}" 
+                    aria-label="Cari informasi"
+                    class="w-full rounded-full border-2 border-green-600 px-6 py-3 text-lg placeholder-green-400 focus:outline-none focus:ring-4 focus:ring-green-300 transition bg-transparent"
+                />
+                <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-600 hover:bg-green-700 text-white rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+                    </svg>
+                </button>
+            </div>
         </form>
     </section>
 
-    <main class="container">
+    <main class="container max-w-7xl mx-auto px-6 pb-12">
         @yield('content')
     </main>
 
-    <footer>
+    <footer class="bg-green-100 text-center py-6 font-semibold text-green-900 border-t border-green-300 shadow-inner">
         &copy; {{ date('Y') }} Portal Informasi Karawang. All rights reserved.
     </footer>
 
