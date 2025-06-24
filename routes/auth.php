@@ -56,4 +56,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+
+    // Added GET logout route to redirect to home to prevent MethodNotAllowedHttpException on GET /logout
+    Route::get('logout', function () {
+        return redirect('/');
+    })->name('logout.get');
 });

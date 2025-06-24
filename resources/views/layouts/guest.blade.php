@@ -22,11 +22,9 @@
                 <img src="{{ asset('storage/logo sidebar/logokrw.png') }}" alt="Logo" class="w-10 h-10 object-contain" />
                 <div class="flex flex-col">
                     <span class="text-2xl font-semibold text-gray-900 leading-none">Portal Informasi Karawang</span>
-                    <span class="text-sm text-gray-600 leading-none">Login</span>
                 </div>
             </div>
             <div>
-                <a href="{{ route('login') }}" class="text-green-700 hover:text-green-900 font-semibold">Login</a>
             </div>
         </div>
     </div>
@@ -34,7 +32,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                    <x-application-logo class="w-12 h-12 fill-current text-gray-500" />
                 </a>
             </div>
 

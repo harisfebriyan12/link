@@ -148,11 +148,13 @@
     <header class="navbar">
         <div class="title">Dashboard Admin Portal Karawang</div>
         <div class="profile">
-            <div class="name">{{ Auth::user()->name }}</div>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
+            @auth
+                <div class="name">{{ Auth::user()->name }}</div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
+            @endauth
         </div>
     </header>
     <div class="container">

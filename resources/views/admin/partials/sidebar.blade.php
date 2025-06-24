@@ -15,7 +15,7 @@
             <div x-show="open" @click.away="open = open" class="pl-12 mt-1 space-y-1">
                 <a href="{{ route('profile.edit') }}" @click="open = false" class="block text-green-700 hover:text-green-900 transition duration-200">Setting Profile</a>
                 <a href="{{ route('admin.manageUsers') }}" @click="open = false" class="block text-green-700 hover:text-green-900 transition duration-200">Manage User</a>
-                <a href="{{ route('profile.edit') }}#update-password" @click="open = false" class="block text-green-700 hover:text-green-900 transition duration-200">Change Password</a>
+                <a href="{{ route('admin.changePassword') }}" @click="open = false" class="block text-green-700 hover:text-green-900 transition duration-200">Change Password</a>
                 <a href="{{ route('profile.edit') }}#delete-account" @click="open = false" class="block text-green-700 hover:text-green-900 transition duration-200">Delete Account</a>
             </div>
         </div>
