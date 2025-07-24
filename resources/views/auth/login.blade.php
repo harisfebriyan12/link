@@ -2,67 +2,79 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Portal Informasi Karawang</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-poppins min-h-screen flex items-center justify-center">
-    <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+        <!-- Logo (tambahkan jika ada) -->
         <div class="mb-6 text-center">
-            <img src="{{ asset('storage/logo sidebar/logokrw.png') }}" alt="Logo" class="mx-auto h-16 w-auto object-contain" />
-            <h1 class="text-3xl font-semibold text-green-900 mt-4">Portal Informasi Karawang</h1>
+            <h2 class="text-2xl font-bold text-gray-800">Login</h2>
         </div>
 
+        <!-- Flash Message -->
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
+            <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-md">
                 {{ session('status') }}
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}" novalidate>
+        @if ($errors->any())
+            <div class="mb-4 p-4 bg-red-100 text-red-700 rounded-md">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- Form -->
+        <form method="POST" action="{{ route('login') }}" class="space-y-4">
             @csrf
 
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition" />
-                @error('email')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                @enderror
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" />
             </div>
 
-            <div class="mb-4">
-                <label for="password" class="block text-gray-700 font-semibold mb-2">Password</label>
-                <input id="password" type="password" name="password" required autocomplete="current-password"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition" />
-                @error('password')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                @enderror
+            <!-- Password -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <input id="password" type="password" name="password" required
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" />
             </div>
 
-            <div class="flex items-center justify-between mb-6">
-                <label for="remember_me" class="inline-flex items-center text-gray-700">
-                    <input id="remember_me" type="checkbox" name="remember" class="rounded border-gray-300 text-green-600 shadow-sm focus:ring-green-500" />
-                    <span class="ml-2 text-sm">Remember me</span>
-                </label>
+            <!-- Remember Me -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input id="remember_me" name="remember" type="checkbox" 
+                        class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" />
+                    <label for="remember_me" class="ml-2 block text-sm text-gray-700">
+                        Ingat saya
+                    </label>
+                </div>
 
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}" class="text-sm text-green-700 hover:text-green-900 underline">Forgot your password?</a>
-                @endif
             </div>
 
-            <button type="submit" class="w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-3 rounded-md transition duration-300">
-                Log in
-            </button>
+            <!-- Submit -->
+            <div>
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition">
+                    Masuk
+                </button>
+            </div>
         </form>
-
-        @if (Route::has('register'))
-            <p class="mt-6 text-center text-gray-600 text-sm">
-                Don't have an account?
-                <a href="{{ route('register') }}" class="text-green-700 hover:text-green-900 underline font-semibold">Register</a>
-            </p>
-        @endif
     </div>
+
 </body>
 </html>

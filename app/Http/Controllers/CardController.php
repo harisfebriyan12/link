@@ -11,20 +11,23 @@ class CardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
-        $query = Card::query();
+public function index(Request $request)
+{
+    $query = Card::query();
 
-        if ($request->has('search') && $request->search != '') {
-            $search = $request->search;
-            $query->where('judul', 'like', "%{$search}%")
-                  ->orWhere('deskripsi', 'like', "%{$search}%");
-        }
-
-        $cards = $query->limit(10)->get();
-
-        return view('cards.index', compact('cards'));
+    if ($request->filled('search')) {
+        $query->where('judul', 'like', '%'.$request->search.'%');
     }
+
+    // Tambahkan with untuk eager loading jika ada relasi
+    $cards = $query->latest()->get();
+
+    // Debug data - untuk testing saja, hapus setelah fix
+    logger()->info('Total cards: '.$cards->count());
+    logger()->info('First card: '.($cards->first() ? $cards->first()->judul : 'null'));
+
+    return view('cards.index', compact('cards'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -42,18 +45,21 @@ class CardController extends Controller
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar' => 'required|image|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'link' => 'required|url',
         ]);
 
+        // Handle upload gambar dengan nama unik
         if ($request->hasFile('gambar')) {
-            $path = $request->file('gambar')->store('cards', 'public');
+            $filename = time().'_'.$request->file('gambar')->getClientOriginalName();
+            $path = $request->file('gambar')->storeAs('cards', $filename, 'public');
             $validated['gambar'] = $path;
         }
 
         Card::create($validated);
 
-        return redirect()->route('cards.index')->with('success', 'Card berhasil ditambahkan.');
+        return redirect()->route('cards.index')
+               ->with('success', 'Data berhasil ditambahkan.');
     }
 
     /**
@@ -72,23 +78,29 @@ class CardController extends Controller
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar' => 'nullable|image|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'link' => 'required|url',
         ]);
 
+        // Handle update gambar
         if ($request->hasFile('gambar')) {
-            if ($card->gambar) {
+            // Hapus gambar lama jika ada
+            if ($card->gambar && Storage::disk('public')->exists($card->gambar)) {
                 Storage::disk('public')->delete($card->gambar);
             }
-            $path = $request->file('gambar')->store('cards', 'public');
+            
+            $filename = time().'_'.$request->file('gambar')->getClientOriginalName();
+            $path = $request->file('gambar')->storeAs('cards', $filename, 'public');
             $validated['gambar'] = $path;
         } else {
+            // Pertahankan gambar lama jika tidak diupdate
             $validated['gambar'] = $card->gambar;
         }
 
         $card->update($validated);
 
-        return redirect()->route('cards.index')->with('success', 'Card berhasil diperbarui.');
+        return redirect()->route('cards.index')
+               ->with('success', 'Data berhasil diperbarui.');
     }
 
     /**
@@ -96,11 +108,14 @@ class CardController extends Controller
      */
     public function destroy(Card $card)
     {
-        if ($card->gambar) {
+        // Hapus file gambar terkait
+        if ($card->gambar && Storage::disk('public')->exists($card->gambar)) {
             Storage::disk('public')->delete($card->gambar);
         }
+        
         $card->delete();
 
-        return redirect()->route('cards.index')->with('success', 'Card berhasil dihapus.');
+        return redirect()->route('cards.index')
+               ->with('success', 'Data berhasil dihapus.');
     }
 }

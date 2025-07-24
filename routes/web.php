@@ -6,6 +6,9 @@ use App\Http\Controllers\CardController;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+})->name('admin.home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('cards', [CardController::class, 'index'])->name('cards.index');

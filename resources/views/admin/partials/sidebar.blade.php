@@ -1,28 +1,32 @@
-<aside class="w-64 bg-green-50 p-6 shadow-inner border-r border-green-200 min-h-screen">
-    <nav class="flex flex-col space-y-4">
-        <a href="{{ route('admin.home') }}" class="text-green-800 font-semibold hover:text-green-900 transition duration-200">Home</a>
-        <a href="{{ url('/') }}" class="text-green-800 font-semibold hover:text-green-900 transition duration-200" target="_blank">View</a>
-        <a href="{{ route('admin.manageCards') }}" class="text-green-800 font-semibold hover:text-green-900 transition duration-200">Manage Card</a>
+@php
+    $activeRoute = Route::currentRouteName();
+@endphp
 
-        <div x-data="{ open: true }" class="relative">
-            <button @click="open = !open" class="w-full text-left text-green-800 font-semibold hover:text-green-900 transition duration-200 focus:outline-none flex items-center justify-between">
-                <span>Manage profile</span>
-                <svg :class="{'transform rotate-180': open}" class="inline-block w-4 h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+<aside :class="open ? 'w-64' : 'w-0'" 
+       class="bg-white border-r border-gray-200 shadow-xl transition-all duration-300 fixed inset-y-0 left-0 z-40 md:w-64 md:static md:shadow-lg min-h-screen overflow-hidden">
+
+    <!-- Sidebar Content -->
+    <div class="p-6 md:pt-8" x-show="open || window.innerWidth >= 768">
+        <nav class="flex flex-col space-y-2 text-sm font-medium text-gray-700">
+            <!-- Dashboard -->
+            <a href="{{ route('admin.home') }}"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 
+               {{ $activeRoute === 'admin.home' ? 'bg-green-100 text-green-800 font-semibold shadow-sm' : 'hover:bg-green-50 hover:text-green-700' }}">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6"/>
                 </svg>
-            </button>
+                <span class="truncate">Dashboard</span>
+            </a>
 
-            <div x-show="open" @click.away="open = open" class="pl-12 mt-1 space-y-1">
-                <a href="{{ route('profile.edit') }}" @click="open = false" class="block text-green-700 hover:text-green-900 transition duration-200">Setting Profile</a>
-                <a href="{{ route('admin.manageUsers') }}" @click="open = false" class="block text-green-700 hover:text-green-900 transition duration-200">Manage User</a>
-                <a href="{{ route('admin.changePassword') }}" @click="open = false" class="block text-green-700 hover:text-green-900 transition duration-200">Change Password</a>
-                <a href="{{ route('profile.edit') }}#delete-account" @click="open = false" class="block text-green-700 hover:text-green-900 transition duration-200">Delete Account</a>
-            </div>
-        </div>
-
-        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();" class="text-green-800 font-semibold hover:text-green-900 transition duration-200 cursor-pointer">Logout</a>
-        <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" class="hidden">
-            @csrf
-        </form>
-    </nav>
+            <!-- Kelola Data -->
+            <a href="{{ route('cards.index') }}"
+               class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 
+               {{ $activeRoute === 'cards.index' ? 'bg-green-100 text-green-800 font-semibold shadow-sm' : 'hover:bg-green-50 hover:text-green-700' }}">
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2h6v2m2 0a2 2 0 002-2V9a2 2 0 00-2-2H7a2 2 0 00-2 2v6a2 2 0 002 2h10z"/>
+                </svg>
+                <span class="truncate">Kelola Data</span>
+            </a>
+        </nav>
+    </div>
 </aside>
