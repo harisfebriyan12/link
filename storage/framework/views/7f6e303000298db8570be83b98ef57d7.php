@@ -1,8 +1,6 @@
-@extends('layouts.admin')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="mb-10">
-        <h1 class="text-4xl font-bold text-green-700 mb-4"> {{ Auth::user()->namew }}</h1>
+        <h1 class="text-4xl font-bold text-green-700 mb-4"> <?php echo e(Auth::user()->namew); ?></h1>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
 
@@ -13,7 +11,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <h2 class="text-sm text-gray-500">Total Link</h2>
-                        <h1 class="text-2xl font-bold text-green-800 mt-1">{{ $totalCards }}</h1>
+                        <h1 class="text-2xl font-bold text-green-800 mt-1"><?php echo e($totalCards); ?></h1>
                     </div>
                     <div class="text-green-700 bg-green-100 p-2 rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -27,4 +25,6 @@
 
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\portalWebn\resources\views/admin/dashboard_admin.blade.php ENDPATH**/ ?>

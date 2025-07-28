@@ -10,11 +10,10 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        // Get cards count for chart (example: count of cards)
+        // Get cards count for chart
         $cardsCount = Card::count();
 
-        // Get visitor count - assuming a 'visitors' table or similar exists
-        // For now, simulate visitor count as a static number or from a cache
+        // Get visitor count
         $visitorCount = cache()->get('visitor_count', 1234);
 
         // Check if search query is present
@@ -25,11 +24,10 @@ class HomeController extends Controller
             $cards = Card::where('judul', 'like', '%' . $search . '%')
                 ->orWhere('deskripsi', 'like', '%' . $search . '%')
                 ->latest()
-                ->limit(5)
-                ->get();
+                ->paginate(1); // Gunakan paginate alih-alih limit()->get()
         } else {
-            // Get latest 5 cards for display on home page
-            $cards = Card::latest()->limit(5)->get();
+            // Get cards with pagination
+            $cards = Card::latest()->paginate(1); // Gunakan paginate alih-alih limit(5)->get()
         }
 
         return view('home', compact('cardsCount', 'visitorCount', 'cards'));

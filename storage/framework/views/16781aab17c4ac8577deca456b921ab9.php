@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Portal Informasi Karawang</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <style>
         body {
@@ -23,30 +23,31 @@
         </div>
 
         <!-- Flash Message -->
-        @if (session('status'))
+        <?php if(session('status')): ?>
             <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-md">
-                {{ session('status') }}
-            </div>
-        @endif
+                <?php echo e(session('status')); ?>
 
-        @if ($errors->any())
+            </div>
+        <?php endif; ?>
+
+        <?php if($errors->any()): ?>
             <div class="mb-4 p-4 bg-red-100 text-red-700 rounded-md">
                 <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        @endif
+        <?php endif; ?>
 
         <!-- Form -->
-        <form method="POST" action="{{ route('login') }}" class="space-y-4" id="loginForm">
-            @csrf
+        <form method="POST" action="<?php echo e(route('login')); ?>" class="space-y-4" id="loginForm">
+            <?php echo csrf_field(); ?>
 
             <!-- Email -->
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                <input id="email" type="email" name="email" value="<?php echo e(old('email')); ?>" required autofocus
                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" />
             </div>
 
@@ -59,7 +60,7 @@
 
             <!-- Google reCAPTCHA -->
             <div>
-                <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+                <div class="g-recaptcha" data-sitekey="<?php echo e(env('RECAPTCHA_SITE_KEY')); ?>"></div>
             </div>
 
             <!-- Submit -->
@@ -96,15 +97,16 @@
         });
 
         // Tampilkan SweetAlert untuk error autentikasi
-        @if ($errors->has('email') || $errors->has('password'))
+        <?php if($errors->has('email') || $errors->has('password')): ?>
             Swal.fire({
                 icon: 'error',
                 title: 'Login Gagal',
                 text: 'Email atau kata sandi salah. Silakan coba lagi.',
                 confirmButtonColor: '#16a34a',
             });
-        @endif
+        <?php endif; ?>
     </script>
 
 </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\portalWebn\resources\views/auth/login.blade.php ENDPATH**/ ?>
